@@ -1,7 +1,9 @@
 package com.boardgame.battlefield.persistence.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,8 +28,8 @@ public class FleetEntity {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @OneToMany(mappedBy = "fleet")
-    private List<ShipEntity> ships;
+    @OneToMany(mappedBy = "fleet", cascade = CascadeType.ALL)
+    private List<ShipEntity> ships = new ArrayList<ShipEntity>();
 
     @ManyToOne
     @JoinColumn(name = "id_player", referencedColumnName = "id", insertable = false, updatable = false)
@@ -36,4 +38,8 @@ public class FleetEntity {
     @OneToMany(mappedBy = "fleet")
     private List<MovementEntity> movements;
 
+    public void addShip(ShipEntity ship) {
+        this.ships.add(ship);
+        ship.setFleet(this);
+    }
 }

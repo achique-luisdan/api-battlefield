@@ -2,6 +2,8 @@ package com.boardgame.battlefield.persistence.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,11 +28,12 @@ public class ShipEntity {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "id_type_ship", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "id_type_ship", referencedColumnName = "id")
     private TypeShipEntity typeShip;
 
     @ManyToOne
-    @JoinColumn(name = "id_fleet", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "id_fleet", referencedColumnName = "id")
+    @JsonIgnore
     private FleetEntity fleet;
 
     @Column(nullable = false)

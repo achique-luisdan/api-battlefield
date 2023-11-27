@@ -21,9 +21,9 @@ public class TypeShipController {
         this.typeShipService = typeShipService;
     }
 
-
     @GetMapping
     public ResponseEntity<List <TypeShipEntity>> getAll(){
         return ResponseEntity.ok(this.typeShipService.getAll());
     }
+
 }

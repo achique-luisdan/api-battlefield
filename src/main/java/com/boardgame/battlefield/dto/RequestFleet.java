@@ -10,4 +10,6 @@ import lombok.Setter;
 @Setter
 public class RequestFleet {
     private List<Ship> ships = new ArrayList<Ship>();
+    private String battleId;
+    private String playerName;
 }

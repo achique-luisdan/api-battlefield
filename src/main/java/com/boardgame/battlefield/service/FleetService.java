@@ -8,6 +8,7 @@ import com.boardgame.battlefield.persistence.repository.FleetRepository;
 
 @Service
 public class FleetService {
+
     @Autowired
     private final FleetRepository fleetRepository;
 

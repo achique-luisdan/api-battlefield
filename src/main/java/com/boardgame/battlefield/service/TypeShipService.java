@@ -11,9 +11,10 @@ import com.boardgame.battlefield.persistence.repository.TypeShipRepository;
 @Service
 public class TypeShipService {
 
+    @Autowired
     private final TypeShipRepository typeShipRepository;
 
-    @Autowired
+
     public TypeShipService(TypeShipRepository typeShipRepository) {
         this.typeShipRepository = typeShipRepository;
     }

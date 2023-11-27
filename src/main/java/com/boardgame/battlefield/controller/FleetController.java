@@ -1,5 +1,7 @@
 package com.boardgame.battlefield.controller;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +35,15 @@ public class FleetController {
     @PostMapping
     public ResponseEntity<FleetEntity> create( @RequestBody RequestFleet request ) {
         FleetEntity fleet = new FleetEntity();
+        fleet.setPlayerName(request.getPlayerName());
+        if (request.getBattleId() == null || request.getBattleId().isEmpty()){
+            UUID uuid = UUID.randomUUID();
+            fleet.setBattleId(uuid);
+        }
+        else {
+            UUID uuid = UUID.fromString(request.getBattleId());
+            fleet.setBattleId(uuid);
+        }
         for (Ship ship : request.getShips()) {
             ShipEntity shipEntity = new ShipEntity();
             shipEntity.setCoordinates(ship.getCoordinates());

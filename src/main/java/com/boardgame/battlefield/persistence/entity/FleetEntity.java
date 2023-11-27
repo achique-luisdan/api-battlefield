@@ -2,6 +2,9 @@ package com.boardgame.battlefield.persistence.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -9,8 +12,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -28,12 +29,16 @@ public class FleetEntity {
     @Column(name = "id", nullable = false)
     private Integer id;
 
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(name = "id_battle", nullable = false)
+    private UUID battleId;
+
+    @Column(name = "player_name", nullable = false)
+    private String playerName;
+
     @OneToMany(mappedBy = "fleet", cascade = CascadeType.ALL)
     private List<ShipEntity> ships = new ArrayList<ShipEntity>();
-
-    @ManyToOne
-    @JoinColumn(name = "id_player", referencedColumnName = "id", insertable = false, updatable = false)
-    private PlayerEntity player;
 
     @OneToMany(mappedBy = "fleet")
     private List<MovementEntity> movements;
